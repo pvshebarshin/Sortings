@@ -1,3 +1,0 @@
-C:/Projects/Sortings/cmake-build-debug/CMakeFiles/Sortings.dir
-C:/Projects/Sortings/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Projects/Sortings/cmake-build-debug/CMakeFiles/rebuild_cache.dir
