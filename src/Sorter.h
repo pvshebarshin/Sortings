@@ -1,63 +1,64 @@
 #ifndef SORTINGS_SORTER_H
 #define SORTINGS_SORTER_H
 
+template <typename T>
 class Sorter
 {
 public:
 
     // Функция сортировки подсчетом
     // Подходит только для неотрицательных целых чисел, линейная, устойчивая
-    void countingSort(int *numbers, const int& array_size);
+    void countingSort(int *numbers, const uint32_t& array_size);
 
     // Функция цифровой сортировки
     // Подходит только для неотрицательных целых чисел, линейная
-    void radixSort(int *numbers, const int& array_size);
+    void radixSort(int *numbers, const uint32_t& array_size);
 
     // Сортировка слиянием
-    void mergeSort(int *arr, const int& length);
+    void mergeSort(T *arr, const uint32_t& length);
 
     // Сортировка кучей(Пирамидальная сортировка)
-    void heapSort(int *numbers, const int& array_size);
+    void heapSort(T *numbers, const uint32_t& array_size);
 
     // Быстрая сортировка(сортировка Хора)
-    void quickSort(int *numbers, const int& array_size);
+    void quickSort(T *numbers, const uint32_t& array_size);
 
     // Сортировка пузырьком
     // Подходит для любых чисел
-    void bubbleSort(int *arr, const int& array_size);
+    void bubbleSort(T *arr, const uint32_t& array_size);
 
     // Шейкерная сортировка
-    void shakerSort(int *arr, const int& array_size);
+    void shakerSort(T *arr, const uint32_t& array_size);
 
     // Сортировка расческой
-    void combSort(int *arr, const int& array_size);
+    void combSort(T *arr, const uint32_t& array_size);
 
     // Сортировка Шелла
-    void shellSort(int *arr, const int& array_size);
+    void shellSort(T *arr, const uint32_t& array_size);
 
     // Сортировка чёт-нечет
-    void oddEvenSort(int *arr, const int& array_size);
+    void oddEvenSort(T *arr, const uint32_t& array_size);
 
     // Самая простая сортировка
-    void simpleSort(int *arr, const int& array_size);
+    void simpleSort(T *arr, const uint32_t& array_size);
 
     // Сортировка выбором
-    void selectionSort(int *arr, const int& array_size);
+    void selectionSort(T *arr, const uint32_t& array_size);
 
     // Сортировка вставками
-    void insertionSort(int *arr, const int& array_size);
+    void insertionSort(T *arr, const uint32_t& array_size);
 
 private:
 
-    void merge(int* arr, int first, int second, int end);
+    void merge(T* arr, uint32_t first, uint32_t second, uint32_t end);
 
-    void divide_and_merge(int *arr, int left, int right);
+    void divide_and_merge(T *arr, uint32_t left, uint32_t right);
 
-    void heaping(int *numbers, int array_size, int index);
+    void heaping(T *numbers, uint32_t array_size, uint32_t index);
 
-    void quickSort(int *numbers, int left, int right);
+    void quickSort(T *numbers, uint32_t left, uint32_t right);
 
-    int rerange(int* numbers, int left, int right, int x);
+    uint32_t rerange(T* numbers, uint32_t left, uint32_t right, uint32_t x);
 
 };
 

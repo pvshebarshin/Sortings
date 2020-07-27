@@ -1,6 +1,7 @@
 #include "Sorter.h"
 
-void Sorter::countingSort(int* numbers, const int& array_size)
+template<typename T>
+void Sorter<T>::countingSort(int* numbers, const uint32_t& array_size)
 {
     int max = -1, i;
     for (i = 0; i < array_size; ++i)
@@ -31,9 +32,11 @@ void Sorter::countingSort(int* numbers, const int& array_size)
     delete[] B;
 }
 
-void Sorter::radixSort(int *numbers, const int &array_size)
+template<typename T>
+void Sorter<T>::radixSort(int *numbers, const uint32_t &array_size)
 {
-    int max_value = -1, i;
+    int max_value = -1;
+    uint32_t i;
 
     for (i = 0; i < array_size; ++i)
         if (numbers[i] > max_value)
@@ -61,18 +64,20 @@ void Sorter::radixSort(int *numbers, const int &array_size)
     }
 }
 
-void Sorter::mergeSort(int *arr, const int& length)
+template<typename T>
+void Sorter<T>::mergeSort(T *arr, const uint32_t& length)
 {
     divide_and_merge(arr, 0, length - 1);
 }
 
-void Sorter::merge(int *arr, int first, int second, int end)
+template<typename T>
+void Sorter<T>::merge(T *arr, uint32_t first, uint32_t second, uint32_t end)
 {
-    int current_number = 0,
+    uint32_t current_number = 0,
     index_left = first,
     index_right = second + 1;
 
-    int* mas = new int[end + 1];
+    T* mas = new T[end + 1];
     while (index_left <= second && index_right <= end)
     {
         if (arr[index_left] < arr[index_right])
@@ -97,7 +102,7 @@ void Sorter::merge(int *arr, int first, int second, int end)
         for(; index_right <= end; mas[current_number++] = arr[index_right++]);
     }
 
-    int arrayPointer = first;
+    uint32_t arrayPointer = first;
     for (current_number = 0; arrayPointer <= end; ++arrayPointer)
     {
         arr[arrayPointer] = mas[current_number];
@@ -107,7 +112,8 @@ void Sorter::merge(int *arr, int first, int second, int end)
     delete[] mas;
 }
 
-void Sorter::divide_and_merge(int *arr, int left, int right)
+template<typename T>
+void Sorter<T>::divide_and_merge(T *arr, uint32_t left, uint32_t right)
 {
     if(left == right)
         return;
@@ -115,23 +121,26 @@ void Sorter::divide_and_merge(int *arr, int left, int right)
     {
         if(arr[right] < arr[left])
         {
-            int t = arr[right];
+            T t = arr[right];
             arr[right] = arr[left];
             arr[left] = t;
         }
         return;
     }
 
-    int index = (right + left) / 2;
+    uint32_t index = (right + left) / 2;
 
     divide_and_merge(arr, left, index);
     divide_and_merge(arr, index + 1, right);
     merge(arr, left, index, right);
 }
 
-void Sorter::heapSort(int *numbers, const int& array_size)
+template<typename T>
+void Sorter<T>::heapSort(T *numbers, const uint32_t& array_size)
 {
-    int i, t;
+    uint32_t i;
+    T t;
+
     for (i = array_size / 2 - 1; i >= 0; --i)
         heaping(numbers, array_size, i);
 
@@ -145,11 +154,12 @@ void Sorter::heapSort(int *numbers, const int& array_size)
     }
 }
 
-void Sorter::heaping(int *numbers, int array_size, int index)
+template<typename T>
+void Sorter<T>::heaping(T *numbers, uint32_t array_size, uint32_t index)
 {
-    int largest_index = index;
-    int left_index = 2 * index + 1;
-    int right_index = 2 * index + 2;
+    uint32_t largest_index = index;
+    uint32_t left_index = 2 * index + 1;
+    uint32_t right_index = 2 * index + 2;
 
     if (left_index < array_size && numbers[left_index] > numbers[largest_index])
         largest_index = left_index;
@@ -159,36 +169,39 @@ void Sorter::heaping(int *numbers, int array_size, int index)
 
     if (largest_index != index)
     {
-        int t = numbers[index];
+        T t = numbers[index];
         numbers[index] = numbers[largest_index];
         numbers[largest_index] = t;
         heaping(numbers, array_size, largest_index);
     }
 }
 
-void Sorter::quickSort(int *numbers, const int& array_size)
+template<typename T>
+void Sorter<T>::quickSort(T *numbers, const uint32_t& array_size)
 {
     quickSort(numbers, 0, array_size - 1);
 }
 
-void Sorter::quickSort(int *numbers, int left, int right)
+template<typename T>
+void Sorter<T>::quickSort(T *numbers, uint32_t left, uint32_t right)
 {
     if (left < right)
     {
-        int x = left + (right - left) / 2;
-        int pivot  = rerange(numbers, left, right, x);
+        uint32_t x = left + (right - left) / 2;
+        uint32_t pivot  = rerange(numbers, left, right, x);
         quickSort(numbers, left, pivot);
         quickSort(numbers, pivot + 1, right);
 
     }
 }
 
-int Sorter::rerange(int *numbers, int left, int right, int x)
+template<typename T>
+uint32_t Sorter<T>::rerange(T *numbers, uint32_t left, uint32_t right, uint32_t x)
 {
-    int pivot = numbers[x];
-    int i = left - 1;
-    int j = right + 1;
-    int t;
+    T pivot = numbers[x];
+    uint32_t i = left - 1;
+    uint32_t j = right + 1;
+    T t;
     while (true)
     {
         do
@@ -208,11 +221,13 @@ int Sorter::rerange(int *numbers, int left, int right, int x)
     }
 }
 
-void Sorter::bubbleSort(int *arr, const int& array_size)
+template<typename T>
+void Sorter<T>::bubbleSort(T *arr, const uint32_t& array_size)
 {
-    int t, j;
+    uint32_t i, j;
+    T t;
 
-    for (int i = 0; i < array_size - 1; ++i)
+    for (i = 0; i < array_size - 1; ++i)
         for (j = 0; j < array_size - i - 1; ++j)
             if (arr[j] > arr[j + 1])
             {
@@ -222,11 +237,13 @@ void Sorter::bubbleSort(int *arr, const int& array_size)
             }
 }
 
-void Sorter::shakerSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::shakerSort(T *arr, const uint32_t &array_size)
 {
-    int t, i;
-    int left = 0;
-    int right = array_size - 1;
+    uint32_t i;
+    T t;
+    uint32_t left = 0;
+    uint32_t right = array_size - 1;
     do {
 
         for (i = left; i < right; ++i)
@@ -250,10 +267,12 @@ void Sorter::shakerSort(int *arr, const int &array_size)
     } while (left < right);
 }
 
-void Sorter::combSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::combSort(T *arr, const uint32_t &array_size)
 {
-    int t, temp_shift, N = array_size, i;
-    int shift = array_size;
+    T t;
+    uint32_t temp_shift, N = array_size, i;
+    uint32_t shift = array_size;
 
     while(N > 1)
     {
@@ -277,11 +296,13 @@ void Sorter::combSort(int *arr, const int &array_size)
     }
 }
 
-void Sorter::shellSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::shellSort(T *arr, const uint32_t &array_size)
 {
-    int i, j, t;
+    uint32_t i, j;
+    T t;
 
-    for (int step = array_size / 2; step > 0; step /= 2)
+    for (uint32_t step = array_size / 2; step > 0; step /= 2)
         for (i = step; i < array_size; --i)
             for (j = i - step; j >= 0 && arr[j] > arr[j + step]; j -= step)
             {
@@ -291,10 +312,12 @@ void Sorter::shellSort(int *arr, const int &array_size)
             }
 }
 
-void Sorter::oddEvenSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::oddEvenSort(T *arr, const uint32_t &array_size)
 {
-    int j, t;
-    for (int i = 0; i < array_size; ++i)
+    uint32_t i, j;
+    T t;
+    for (i = 0; i < array_size; ++i)
         for (j = (i % 2) ? 0 : 1; j + 1 < array_size; j += 2)
             if (arr[j] > arr[j + 1])
             {
@@ -304,11 +327,13 @@ void Sorter::oddEvenSort(int *arr, const int &array_size)
             }
 }
 
-void Sorter::simpleSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::simpleSort(T *arr, const uint32_t &array_size)
 {
-    int t, j;
+    uint32_t i, j;
+    T t;
 
-    for (int i = 0; i < array_size - 1; ++i)
+    for (i = 0; i < array_size - 1; ++i)
         for (j = 0; j < array_size - 1; ++j)
             if (arr[j] > arr[j + 1])
             {
@@ -318,10 +343,13 @@ void Sorter::simpleSort(int *arr, const int &array_size)
             }
 }
 
-void Sorter::selectionSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::selectionSort(T *arr, const uint32_t &array_size)
 {
-    int min_index, j, t;
-    for (int i = 0; i < array_size - 1; ++i)
+    uint32_t min_index, i, j;
+    T t;
+
+    for (i = 0; i < array_size - 1; ++i)
     {
         min_index = i;
 
@@ -338,11 +366,14 @@ void Sorter::selectionSort(int *arr, const int &array_size)
     }
 }
 
-void Sorter::insertionSort(int *arr, const int &array_size)
+template<typename T>
+void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
 {
-    int i, j, t;
+    uint32_t i, j;
+    T t;
+
     for(i = 1; i < array_size; ++i)
-        for(j = i; j > 0 && arr[j-1] > arr[j]; --j)
+        for(j = i; j > 0 && arr[j - 1] > arr[j]; --j)
         {
             t = arr[j];
             arr[j] = arr[j - 1];
@@ -350,3 +381,4 @@ void Sorter::insertionSort(int *arr, const int &array_size)
         }
 
 }
+
