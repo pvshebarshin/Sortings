@@ -381,4 +381,3 @@ void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
         }
 
 }
-
