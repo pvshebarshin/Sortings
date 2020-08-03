@@ -52,6 +52,8 @@ public:
     void gnomeSort(T *arr, const uint32_t& array_size);
 
     // Бетонная Сортировка
+    // может использоваться только если количество элементов в
+    // массиве 2^n
     void bitonicSort(T *arr, const uint32_t& array_size);
 
     // Обезьянья Сортировка
@@ -63,15 +65,16 @@ private:
 
     void divide_and_merge(T *arr, uint32_t left, uint32_t right);
 
-    void heaping(T *numbers, uint32_t array_size, uint32_t index);
+    void heaping(T *numbers, const uint32_t& array_size,
+            uint32_t index, const uint32_t max);
 
     void quickSort(T *numbers, uint32_t left, uint32_t right);
 
     uint32_t rerange(T* numbers, uint32_t left, uint32_t right, uint32_t x);
 
-    void bitonicSort(T* arr, uint32_t begin, uint32_t end);
+    void bitonicSort(T* arr, uint32_t begin, uint32_t end, int marker);
 
-    void bitonicMerge(T* arr, uint32_t begin, uint32_t end);
+    void bitonicMerge(T* arr, uint32_t begin, uint32_t end, int marker);
 
     bool isGood(T *arr, uint32_t array_size);
 

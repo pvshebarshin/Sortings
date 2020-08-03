@@ -142,7 +142,7 @@ void Sorter<T>::heapSort(T *numbers, const uint32_t& array_size)
     T t;
 
     for (i = array_size / 2 - 1; i >= 0; --i)
-        heaping(numbers, array_size, i);
+        heaping(numbers, array_size, i, array_size);
 
     for (i = array_size - 1; i >= 0; --i)
     {
@@ -150,29 +150,33 @@ void Sorter<T>::heapSort(T *numbers, const uint32_t& array_size)
         numbers[0] = numbers[i];
         numbers[i] = t;
 
-        heaping(numbers, i, 0);
+        heaping(numbers, i, 0, i);
     }
 }
 
 template<typename T>
-void Sorter<T>::heaping(T *numbers, uint32_t array_size, uint32_t index)
+void Sorter<T>::heaping(T *numbers, const uint32_t& array_size,
+        uint32_t index, const uint32_t max)
 {
     uint32_t largest_index = index;
     uint32_t left_index = 2 * index + 1;
-    uint32_t right_index = 2 * index + 2;
+    uint32_t right_index = left_index + 1;
 
-    if (left_index < array_size && numbers[left_index] > numbers[largest_index])
-        largest_index = left_index;
-
-    if (right_index < array_size && numbers[right_index] > numbers[largest_index])
-        largest_index = right_index;
-
-    if (largest_index != index)
+    while(index < max)
     {
+        if (left_index < array_size && numbers[left_index] > numbers[largest_index])
+            largest_index = left_index;
+
+        if (right_index < array_size && numbers[right_index] > numbers[largest_index])
+            largest_index = right_index;
+
+        if(largest_index == index)
+            return;
+
         T t = numbers[index];
         numbers[index] = numbers[largest_index];
         numbers[largest_index] = t;
-        heaping(numbers, array_size, largest_index);
+        index = largest_index;
     }
 }
 
@@ -299,17 +303,22 @@ void Sorter<T>::combSort(T *arr, const uint32_t &array_size)
 template<typename T>
 void Sorter<T>::shellSort(T *arr, const uint32_t &array_size)
 {
-    uint32_t i, j;
+    uint32_t i, j, step;
     T t;
-
-    for (uint32_t step = array_size / 2; step > 0; step /= 2)
-        for (i = step; i < array_size; --i)
-            for (j = i - step; j >= 0 && arr[j] > arr[j + step]; j -= step)
+    for (step = array_size / 2; step > 0; step /= 2)
+        for (i = step; i < array_size; ++i)
+        {
+            t = arr[i];
+            for (j = i; j >= step; j -= step)
             {
-                t = arr[j];
-                arr[j] = arr[j + step];
-                arr[j + step] = t;
+                if (t < arr[j - step]) {
+                    arr[j] = arr[j - step];
+                } else {
+                    break;
+                }
             }
+            arr[j] = t;
+        }
 }
 
 template<typename T>
@@ -318,12 +327,12 @@ void Sorter<T>::oddEvenSort(T *arr, const uint32_t &array_size)
     uint32_t i, j;
     T t;
     for (i = 0; i < array_size; ++i)
-        for (j = (i % 2) ? 0 : 1; j + 1 < array_size; j += 2)
+        for (j = i % 2 ? 0 : 1; j + 1 < array_size; j += 2)
             if (arr[j] > arr[j + 1])
             {
-                t = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = t;
+                t = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = t;
             }
 }
 
@@ -405,23 +414,23 @@ void Sorter<T>::gnomeSort(T *arr, const uint32_t &array_size)
 template<typename T>
 void Sorter<T>::bitonicSort(T *arr, const uint32_t &array_size)
 {
-    bitonicSort(arr, 0, array_size);
+    bitonicSort(arr, 0, array_size, 1);
 }
 
 template<typename T>
-void Sorter<T>::bitonicSort(T* arr, uint32_t begin, uint32_t end)
+void Sorter<T>::bitonicSort(T* arr, uint32_t begin, uint32_t end, int marker)
 {
     if (end > 1)
     {
         uint32_t x = end / 2;
         bitonicSort(arr, begin, x, 1);
         bitonicSort(arr, begin + x, x, 0);
-        bitonicMerge(arr, begin, end);
+        bitonicMerge(arr, begin, end, marker);
     }
 }
 
 template<typename T>
-void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end)
+void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end, int marker)
 {
     if (end > 1)
     {
@@ -429,12 +438,15 @@ void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end)
         uint32_t x = end / 2;
         for (uint32_t i = begin; i < begin + x; ++i)
         {
-            t = arr[i];
-            arr[i] = arr[i + x];
-            arr[i + x] = t;
+            if(marker == arr[i] > arr[i + x])
+            {
+                t = arr[i];
+                arr[i] = arr[i + x];
+                arr[i + x] = t;
+            }
         }
-        bitonicMerge(arr, begin, x);
-        bitonicMerge(arr, begin + x, x);
+        bitonicMerge(arr, begin, x, marker);
+        bitonicMerge(arr, begin + x, x, marker);
     }
 }
 
