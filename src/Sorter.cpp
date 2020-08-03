@@ -401,3 +401,39 @@ void Sorter<T>::gnomeSort(T *arr, const uint32_t &array_size)
         }
     }
 }
+
+template<typename T>
+void Sorter<T>::bitonicSort(T *arr, const uint32_t &array_size)
+{
+    bitonicSort(arr, 0, array_size);
+}
+
+template<typename T>
+void Sorter<T>::bitonicSort(T* arr, uint32_t begin, uint32_t end)
+{
+    if (end > 1)
+    {
+        uint32_t x = end / 2;
+        bitonicSort(arr, begin, x, 1);
+        bitonicSort(arr, begin + x, x, 0);
+        bitonicMerge(arr, begin, end);
+    }
+}
+
+template<typename T>
+void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end)
+{
+    if (end > 1)
+    {
+        T t;
+        uint32_t x = end / 2;
+        for (uint32_t i = begin; i < begin + x; ++i)
+        {
+            t = arr[i];
+            arr[i] = arr[i + x];
+            arr[i + x] = t;
+        }
+        bitonicMerge(arr, begin, x);
+        bitonicMerge(arr, begin + x, x);
+    }
+}

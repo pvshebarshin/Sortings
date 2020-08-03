@@ -51,6 +51,9 @@ public:
     // Гномья Сортировка
     void gnomeSort(T *arr, const uint32_t& array_size);
 
+    // Бетонная Сортировка
+    void bitonicSort(T *arr, const uint32_t& array_size);
+
 private:
 
     void merge(T* arr, uint32_t first, uint32_t second, uint32_t end);
@@ -62,6 +65,10 @@ private:
     void quickSort(T *numbers, uint32_t left, uint32_t right);
 
     uint32_t rerange(T* numbers, uint32_t left, uint32_t right, uint32_t x);
+
+    void bitonicSort(T* arr, uint32_t begin, uint32_t end);
+
+    void bitonicMerge(T* arr, uint32_t begin, uint32_t end);
 
 };
 
