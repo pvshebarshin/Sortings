@@ -59,6 +59,9 @@ public:
     // Обезьянья Сортировка
     void bogoSort(T *arr, const uint32_t& array_size);
 
+    // Сортировка Тима
+//    void timSort(T *arr, const uint32_t& array_size);
+
 private:
 
     void merge(T* arr, uint32_t first, uint32_t second, uint32_t end);
