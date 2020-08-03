@@ -437,3 +437,28 @@ void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end)
         bitonicMerge(arr, begin + x, x);
     }
 }
+
+template<typename T>
+void Sorter<T>::bogoSort(T *arr, const uint32_t &array_size)
+{
+    T t, temp;
+    uint32_t index;
+    while (!isGood(arr, array_size))
+        for (int i = 0; i < array_size; ++i)
+        {
+            t = arr[i];
+            index = rand() % array_size;
+            temp = arr[index];
+            arr[i] = temp;
+            arr[index] = t;
+        }
+}
+
+template<typename T>
+bool Sorter<T>::isGood(T *arr, uint32_t array_size)
+{
+    while (array_size-- > 0)
+        if (arr[array_size - 1] > arr[array_size])
+            return false;
+    return true;
+}
