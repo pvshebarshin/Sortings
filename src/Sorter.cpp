@@ -381,3 +381,23 @@ void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
         }
 
 }
+
+template<typename T>
+void Sorter<T>::gnomeSort(T *arr, const uint32_t &array_size)
+{
+    uint32_t i = 0;
+    T t;
+
+    while (i < array_size) {
+        if (i == 0)
+            ++i;
+        if (arr[i] >= arr[i - 1]) {
+            ++i;
+        } else {
+            t = arr[i];
+            arr[i] = arr[i - 1];
+            arr[i - 1] = t;
+            --i;
+        }
+    }
+}

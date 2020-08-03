@@ -48,6 +48,9 @@ public:
     // Сортировка вставками
     void insertionSort(T *arr, const uint32_t& array_size);
 
+    // Гномья Сортировка
+    void gnomeSort(T *arr, const uint32_t& array_size);
+
 private:
 
     void merge(T* arr, uint32_t first, uint32_t second, uint32_t end);
