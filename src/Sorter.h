@@ -60,9 +60,11 @@ public:
     void bogoSort(T *arr, const uint32_t& array_size);
 
     // Сортировка Тима
-//    void timSort(T *arr, const uint32_t& array_size);
+    void timSort(T *arr, const uint32_t& array_size);
 
 private:
+
+    const int RUN = 32;
 
     void merge(T* arr, uint32_t first, uint32_t second, uint32_t end);
 
@@ -80,6 +82,8 @@ private:
     void bitonicMerge(T* arr, uint32_t begin, uint32_t end, int marker);
 
     bool isGood(T *arr, uint32_t array_size);
+
+    void insertion(T *arr, uint32_t left, uint32_t right);
 
 };
 

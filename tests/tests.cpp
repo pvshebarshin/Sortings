@@ -652,3 +652,51 @@ TEST_F(SortingsTests, bogoSort_Test)
     for(uint32_t i = 0; i < size; ++i)
         ASSERT_EQ(A1[i], B1[i]);
 }
+
+TEST_F(SortingsTests, timSort_Test1)
+{
+    uint32_t size = 10;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 1);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size, 1);
+    iSorter->timSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, timSort_Test2)
+{
+    uint32_t size = 100;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 6);
+    fSorter->bubbleSort(A1, size);
+
+    fillfloatMas(B1, size, 6);
+    fSorter->timSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, timSort_Test3)
+{
+    uint32_t size = 1000;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 16);
+    fSorter->bubbleSort(A1, size);
+
+    fillfloatMas(B1, size, 16);
+    fSorter->timSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}

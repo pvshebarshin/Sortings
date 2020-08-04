@@ -474,3 +474,41 @@ bool Sorter<T>::isGood(T *arr, uint32_t array_size)
             return false;
     return true;
 }
+
+template<typename T>
+void Sorter<T>::timSort(T *arr, const uint32_t& array_size)
+{
+    for (uint32_t i = 0; i < array_size; i += RUN)
+        if(i + 31 < array_size - 1) {
+            insertion(arr, i, i + 31);
+        } else {
+            insertion(arr, i, array_size - 1);
+        }
+
+    uint32_t size, left, mid, right;
+    for (size = RUN; size < array_size; size = 2 * size)
+        for (left = 0; left < array_size; left += 2 * size)
+        {
+            mid = left + size - 1;
+            if(left + 2 * size - 1 < array_size - 1) {
+                right = left + 2 * size - 1;
+            } else {
+                right = array_size - 1;
+            }
+            merge(arr, left, mid, right);
+        }
+}
+
+template<typename T>
+void Sorter<T>::insertion(T *arr, uint32_t left, uint32_t right)
+{
+    T t;
+    uint32_t i, j;
+    for (i = left + 1; i <= right; ++i)
+    {
+        t = arr[i];
+        for(j = i - 1; j >= left && arr[j] > t; --j)
+            arr[j + 1] = arr[j];
+        arr[j + 1] = t;
+    }
+}
