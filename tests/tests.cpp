@@ -95,20 +95,50 @@ TEST_F(SortingsTests, countingSort_Test3)
         ASSERT_EQ(A[i], B[i]);
 }
 
-//TEST_F(SortingsTests, radixSort_Test) {
-//    uint32_t size = 10;
-//    A = new int[size];
-//    B = new int[size];
-//
-//    fillIntMas(A, size, 4);
-//    iSorter->simpleSort(A, size);
-//
-//    fillIntMas(B, size, 4);
-//    iSorter->radixSort(B, size);
-//
-//    for(uint32_t i = 0; i < size; ++i)
-//        ASSERT_EQ(A[i], B[i]);
-//}
+TEST_F(SortingsTests, radixSort_Test1) {
+    uint32_t size = 10;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 4);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size, 4);
+    iSorter->radixSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, radixSort_Test2) {
+    uint32_t size = 100;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 14);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size, 14);
+    iSorter->radixSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, radixSort_Test3) {
+    uint32_t size = 1000;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 41);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size, 41);
+    iSorter->radixSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
 
 TEST_F(SortingsTests, mergeSort_Test1)
 {
@@ -158,20 +188,50 @@ TEST_F(SortingsTests, mergeSort_Test3)
         ASSERT_EQ(A1[i], B1[i]);
 }
 
-//TEST_F(SortingsTests, heapSort_Test) {
-//    uint32_t size = 10;
-//    A1 = new float[size];
-//    B1 = new float[size];
-//
-//    fillfloatMas(A1, size, 33);
-//    fSorter->simpleSort(A1, size);
-//
-//    fillfloatMas(B1, size, 33);
-//    fSorter->heapSort(B1, size);
-//
-//    for(uint32_t i = 0; i < size; ++i)
-//        ASSERT_EQ(A1[i], B1[i]);
-//}
+TEST_F(SortingsTests, heapSort_Test1) {
+    uint32_t size = 10;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 133);
+    fSorter->simpleSort(A1, size);
+
+    fillfloatMas(B1, size, 133);
+    fSorter->heapSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, heapSort_Test2) {
+    uint32_t size = 100;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 1313);
+    fSorter->simpleSort(A1, size);
+
+    fillfloatMas(B1, size, 1313);
+    fSorter->heapSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, heapSort_Test3) {
+    uint32_t size = 1000;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 1133);
+    fSorter->simpleSort(A1, size);
+
+    fillfloatMas(B1, size, 1133);
+    fSorter->heapSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
 
 TEST_F(SortingsTests, quickSort_Test1)
 {

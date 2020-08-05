@@ -1,6 +1,9 @@
 #ifndef SORTINGS_SORTER_H
 #define SORTINGS_SORTER_H
 
+#include <stdint-gcc.h>
+#include <variant>
+
 template <typename T>
 class Sorter
 {
@@ -70,8 +73,9 @@ private:
 
     void divide_and_merge(T *arr, uint32_t left, uint32_t right);
 
-    void heaping(T *numbers, const uint32_t& array_size,
-            uint32_t index, const uint32_t max);
+    void heaping(T *numbers, uint32_t begin, uint32_t end);
+
+    void heapSort(T *numbers, const uint32_t& begin, const  uint32_t& end);
 
     void quickSort(T *numbers, uint32_t left, uint32_t right);
 
@@ -84,6 +88,12 @@ private:
     bool isGood(T *arr, uint32_t array_size);
 
     void insertion(T *arr, uint32_t left, uint32_t right);
+
+    union UNION
+    {
+        unsigned int value;
+        unsigned char mas[4];
+    };
 
 };
 

@@ -14,13 +14,13 @@ void Sorter<T>::countingSort(int* numbers, const uint32_t& array_size)
     for (i = 0; i < max; ++i)
         C[i] = 0;
 
-    for(i = 0; i < array_size; ++i)
+    for (i = 0; i < array_size; ++i)
         ++C[numbers[i]];
 
-    for(i = 1; i < max; ++i)
+    for (i = 1; i < max; ++i)
         C[i] += C[i - 1];
 
-    for(i = array_size - 1; i >= 0; --i)
+    for (i = array_size - 1; i >= 0; --i)
     {
         B[C[numbers[i]] - 1] = numbers[i];
         --C[numbers[i]];
@@ -35,33 +35,40 @@ void Sorter<T>::countingSort(int* numbers, const uint32_t& array_size)
 template<typename T>
 void Sorter<T>::radixSort(int *numbers, const uint32_t &array_size)
 {
-    int max_value = -1;
+    UNION* un_mass = new UNION[array_size];
+
     uint32_t i;
-
-    for (i = 0; i < array_size; ++i)
-        if (numbers[i] > max_value)
-            max_value = numbers[i];
-
-    for (int discharge = 1; max_value/discharge > 0; discharge *= 256)
+    int* C = nullptr;
+    int k;
+    for(int index = 0; index < 4; ++index)
     {
-        int output[array_size];
-        int count[256] = {0};
-
         for (i = 0; i < array_size; ++i)
-            ++count[numbers[i] / discharge % 256];
+            un_mass[i].value = numbers[i];
 
-        for (i = 1; i < 256; ++i)
-            count[i] += count[i - 1];
+        k = un_mass[0].mas[index];
+        for (i = 0; i < array_size; ++i)
+            if(un_mass[i].mas[index] > k)
+                k = un_mass[i].mas[index];
+
+        C = new int[k + 1];
+
+        for (i = 0; i < k + 1; ++i)
+            C[i] = 0;
+        for (i = 0; i < array_size; ++i)
+            C[un_mass[i].mas[index]] += 1;
+        for (i = 1; i < k + 1; ++i)
+            C[i] += C[i - 1];
 
         for (i = array_size - 1; i >= 0; --i)
         {
-            output[count[numbers[i] / discharge % 256] - 1] = numbers[i];
-            --count[numbers[i] / discharge % 256 ];
+            numbers[C[un_mass[i].mas[index]] - 1] = un_mass[i].value;
+            C[un_mass[i].mas[index]] -= 1;
+            if(i == 0)
+                break;
         }
-
-        for (i = 0; i < array_size; ++i)
-            numbers[i] = output[i];
+        delete[] C;
     }
+    delete[] un_mass;
 }
 
 template<typename T>
@@ -138,46 +145,45 @@ void Sorter<T>::divide_and_merge(T *arr, uint32_t left, uint32_t right)
 template<typename T>
 void Sorter<T>::heapSort(T *numbers, const uint32_t& array_size)
 {
+    heapSort(numbers, 0, array_size);
+}
+
+template<typename T>
+void Sorter<T>::heapSort(T *numbers, const uint32_t& begin, const uint32_t& end)
+{
     uint32_t i;
     T t;
+    for(i = (end - 1) / 2; i >= begin; --i){
+        heaping(numbers, i , end - 1);
+        if(i == 0)
+            break;
+    }
 
-    for (i = array_size / 2 - 1; i >= 0; --i)
-        heaping(numbers, array_size, i, array_size);
-
-    for (i = array_size - 1; i >= 0; --i)
+    for(i = end - 1; i > begin; --i)
     {
-        t = numbers[0];
-        numbers[0] = numbers[i];
-        numbers[i] = t;
-
-        heaping(numbers, i, 0, i);
+        t = numbers[i];
+        numbers[i] = numbers[begin];
+        numbers[begin] = t;
+        heaping(numbers, begin, i - 1);
+        if(i == 0)
+            break;
     }
 }
 
 template<typename T>
-void Sorter<T>::heaping(T *numbers, const uint32_t& array_size,
-        uint32_t index, const uint32_t max)
+void Sorter<T>::heaping(T *numbers, uint32_t begin, uint32_t end)
 {
-    uint32_t largest_index = index;
-    uint32_t left_index = 2 * index + 1;
-    uint32_t right_index = left_index + 1;
-
-    while(index < max)
-    {
-        if (left_index < array_size && numbers[left_index] > numbers[largest_index])
-            largest_index = left_index;
-
-        if (right_index < array_size && numbers[right_index] > numbers[largest_index])
-            largest_index = right_index;
-
-        if(largest_index == index)
-            return;
-
-        T t = numbers[index];
-        numbers[index] = numbers[largest_index];
-        numbers[largest_index] = t;
-        index = largest_index;
+    T save = numbers[begin];
+    while (begin <= end / 2) {
+        int k = 2 * begin;
+        while (k < end && numbers[k] < numbers[k + 1])
+            ++k;
+        if(save >= numbers[k])
+            break;
+        numbers[begin] = numbers[k];
+        begin = k;
     }
+    numbers[begin] = save;
 }
 
 template<typename T>
