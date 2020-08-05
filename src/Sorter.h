@@ -3,6 +3,8 @@
 
 #include <stdint-gcc.h>
 #include <variant>
+#include <cmath>
+#include<bits/stdc++.h>
 
 template <typename T>
 class Sorter
@@ -65,6 +67,11 @@ public:
     // Сортировка Тима
     void timSort(T *arr, const uint32_t& array_size);
 
+    // Интроспективная Сортировка
+//    void introSort(T *arr, const uint32_t& array_size);
+
+    void strandSort(T *arr, const uint32_t& array_size);
+
 private:
 
     const int RUN = 32;
@@ -73,7 +80,7 @@ private:
 
     void divide_and_merge(T *arr, uint32_t left, uint32_t right);
 
-    void heaping(T *numbers, uint32_t begin, uint32_t end);
+    void heaping(T *numbers, uint32_t begin, const uint32_t& end);
 
     void heapSort(T *numbers, const uint32_t& begin, const  uint32_t& end);
 
@@ -87,13 +94,50 @@ private:
 
     bool isGood(T *arr, uint32_t array_size);
 
-    void insertion(T *arr, uint32_t left, uint32_t right);
+    void insertion(T *arr, const uint32_t& left, const uint32_t& right);
+
+    void strandSort(std::list<T> &ip, std::list<T> &op);
+
+//    void intro(T* arr, uint32_t begin, uint32_t end, uint32_t depth);
 
     union UNION
     {
         unsigned int value;
         unsigned char mas[4];
     };
+
+//    uint32_t MedianOfThree(T* arr, uint32_t left, uint32_t right)
+//    {
+//        uint32_t mid = (left + right) / 2;
+//        if (arr[right] < arr[left])
+//        {
+//            T t = arr[left];
+//            arr[left] = arr[right];
+//            arr[right] = t;
+//        }
+//        if (arr[mid] < arr[left])
+//        {
+//            T t = arr[left];
+//            arr[left] = arr[mid];
+//            arr[mid] = t;
+//        }
+//        if (arr[right] < arr[mid])
+//        {
+//            T t = arr[right];
+//            arr[right] = arr[mid];
+//            arr[mid] = t;
+//        }
+//        return mid;
+//    }
+
+//    uint32_t MedianOfThree(uint32_t a, uint32_t b, uint32_t c) {
+//        if ((a > b) != (a > c))
+//            return a;
+//        else if ((b > a) != (b > c))
+//            return b;
+//        else
+//            return c;
+//    }
 
 };
 

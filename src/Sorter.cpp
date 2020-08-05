@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Sorter.h"
 
 template<typename T>
@@ -171,11 +172,12 @@ void Sorter<T>::heapSort(T *numbers, const uint32_t& begin, const uint32_t& end)
 }
 
 template<typename T>
-void Sorter<T>::heaping(T *numbers, uint32_t begin, uint32_t end)
+void Sorter<T>::heaping(T *numbers, uint32_t begin, const uint32_t& end)
 {
     T save = numbers[begin];
+    uint32_t k;
     while (begin <= end / 2) {
-        int k = 2 * begin;
+        k = 2 * begin;
         while (k < end && numbers[k] < numbers[k + 1])
             ++k;
         if(save >= numbers[k])
@@ -394,7 +396,6 @@ void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
             arr[j] = arr[j - 1];
             arr[j - 1] = t;
         }
-
 }
 
 template<typename T>
@@ -491,22 +492,22 @@ void Sorter<T>::timSort(T *arr, const uint32_t& array_size)
             insertion(arr, i, array_size - 1);
         }
 
-    uint32_t size, left, mid, right;
+    uint32_t size, left, midl, right;
     for (size = RUN; size < array_size; size = 2 * size)
         for (left = 0; left < array_size; left += 2 * size)
         {
-            mid = left + size - 1;
+            midl = left + size - 1;
             if(left + 2 * size - 1 < array_size - 1) {
                 right = left + 2 * size - 1;
             } else {
                 right = array_size - 1;
             }
-            merge(arr, left, mid, right);
+            merge(arr, left, midl, right);
         }
 }
 
 template<typename T>
-void Sorter<T>::insertion(T *arr, uint32_t left, uint32_t right)
+void Sorter<T>::insertion(T *arr, const uint32_t& left, const uint32_t& right)
 {
     T t;
     uint32_t i, j;
@@ -518,3 +519,71 @@ void Sorter<T>::insertion(T *arr, uint32_t left, uint32_t right)
         arr[j + 1] = t;
     }
 }
+
+template<typename T>
+void Sorter<T>::strandSort(T *arr, const uint32_t &array_size)
+{
+    std::list<T> input, output;
+    for(uint32_t i = 0; i < array_size; ++i)
+        input.push_back(arr[i]);
+
+    strandSort(input, output);
+
+    for(uint32_t i = 0; i < array_size; ++i)
+    {
+        arr[i] = output.front();
+        output.pop_front();
+    }
+}
+
+template<typename T>
+void Sorter<T>::strandSort(std::list<T> &input, std::list<T> &output)
+{
+    if (input.empty())
+        return;
+
+    std::list<T> temp;
+    temp.push_back(input.front());
+    input.pop_front();
+
+    typename std::list<T>::iterator it = input.begin();
+    while (it != input.end())
+        if (*it > temp.back()) {
+            temp.push_back(*it);
+            it = input.erase(it);
+        } else {
+            ++it;
+        }
+
+    output.merge(temp);
+    strandSort(input, output);
+}
+
+//template<typename T>
+//void Sorter<T>::introSort(T *arr, const uint32_t &array_size)
+//{
+//    intro(arr, 0, array_size, 2 * log(array_size));
+//}
+//
+//template<typename T>
+//void Sorter<T>::intro(T *arr, uint32_t begin, uint32_t end, uint32_t depth)
+//{
+//    uint32_t size = end - begin;
+//
+//    if (size < 16)
+//    {
+//        insertion(arr, begin, end);
+//        return;
+//    }
+//
+//    if (depth == 0)
+//    {
+//        heapSort(arr, begin, end + 1);
+//        return;
+//    }
+//
+//    uint32_t pivot = MedianOfThree((end - begin) / 2, begin, end);
+//
+//    intro(arr, begin, pivot, depth - 1);
+//    intro(arr, pivot + 1, end, depth - 1);
+//}

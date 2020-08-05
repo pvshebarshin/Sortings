@@ -95,6 +95,23 @@ TEST_F(SortingsTests, countingSort_Test3)
         ASSERT_EQ(A[i], B[i]);
 }
 
+TEST_F(SortingsTests, countingSort_Test4)
+{
+    uint32_t size = 1000;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 6666);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size,  6666);
+    iSorter->countingSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+
 TEST_F(SortingsTests, radixSort_Test1) {
     uint32_t size = 10;
     A = new int[size];
@@ -140,6 +157,7 @@ TEST_F(SortingsTests, radixSort_Test3) {
         ASSERT_EQ(A[i], B[i]);
 }
 
+
 TEST_F(SortingsTests, mergeSort_Test1)
 {
     uint32_t size = 10;
@@ -174,7 +192,7 @@ TEST_F(SortingsTests, mergeSort_Test2)
 
 TEST_F(SortingsTests, mergeSort_Test3)
 {
-    uint32_t size = 200;
+    uint32_t size = 1000;
     A1 = new float[size];
     B1 = new float[size];
 
@@ -760,3 +778,100 @@ TEST_F(SortingsTests, timSort_Test3)
     for(uint32_t i = 0; i < size; ++i)
         ASSERT_EQ(A1[i], B1[i]);
 }
+
+TEST_F(SortingsTests, strandSort_Test1)
+{
+    uint32_t size = 10;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 16);
+    fSorter->bubbleSort(A1, size);
+
+    fillfloatMas(B1, size, 16);
+    fSorter->strandSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, strandSort_Test2)
+{
+    uint32_t size = 100;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 11);
+    fSorter->bubbleSort(A1, size);
+
+    fillfloatMas(B1, size, 11);
+    fSorter->strandSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, strandSort_Test3)
+{
+    uint32_t size = 1000;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 6);
+    fSorter->bubbleSort(A1, size);
+
+    fillfloatMas(B1, size, 6);
+    fSorter->strandSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+//TEST_F(SortingsTests, introSort_Test1)
+//{
+//    uint32_t size = 10;
+//    A1 = new float[size];
+//    B1 = new float[size];
+//
+//    fillfloatMas(A1, size, 16);
+//    fSorter->bubbleSort(A1, size);
+//
+//    fillfloatMas(B1, size, 16);
+//    fSorter->introSort(B1, size);
+//
+//    for(uint32_t i = 0; i < size; ++i)
+//        ASSERT_EQ(A1[i], B1[i]);
+//}
+//
+//TEST_F(SortingsTests, introSort_Test2)
+//{
+//    uint32_t size = 100;
+//    A1 = new float[size];
+//    B1 = new float[size];
+//
+//    fillfloatMas(A1, size, 11);
+//    fSorter->bubbleSort(A1, size);
+//
+//    fillfloatMas(B1, size, 11);
+//    fSorter->introSort(B1, size);
+//
+//    for(uint32_t i = 0; i < size; ++i)
+//        ASSERT_EQ(A1[i], B1[i]);
+//}
+//
+//TEST_F(SortingsTests, introSort_Test3)
+//{
+//    uint32_t size = 1000;
+//    A1 = new float[size];
+//    B1 = new float[size];
+//
+//    fillfloatMas(A1, size, 6);
+//    fSorter->bubbleSort(A1, size);
+//
+//    fillfloatMas(B1, size, 6);
+//    fSorter->introSort(B1, size);
+//
+//    for(uint32_t i = 0; i < size; ++i)
+//        ASSERT_EQ(A1[i], B1[i]);
+//}
+
