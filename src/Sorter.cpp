@@ -559,31 +559,127 @@ void Sorter<T>::strandSort(std::list<T> &input, std::list<T> &output)
     strandSort(input, output);
 }
 
-//template<typename T>
-//void Sorter<T>::introSort(T *arr, const uint32_t &array_size)
-//{
-//    intro(arr, 0, array_size, 2 * log(array_size));
-//}
-//
-//template<typename T>
-//void Sorter<T>::intro(T *arr, uint32_t begin, uint32_t end, uint32_t depth)
-//{
-//    uint32_t size = end - begin;
-//
-//    if (size < 16)
-//    {
-//        insertion(arr, begin, end);
-//        return;
-//    }
-//
-//    if (depth == 0)
-//    {
-//        heapSort(arr, begin, end + 1);
-//        return;
-//    }
-//
-//    uint32_t pivot = MedianOfThree((end - begin) / 2, begin, end);
-//
-//    intro(arr, begin, pivot, depth - 1);
-//    intro(arr, pivot + 1, end, depth - 1);
-//}
+template<typename T>
+void Sorter<T>::treeSort(T *arr, const uint32_t &array_size)
+{
+    struct Node *root = nullptr;
+
+    root = insert(root, arr[0]);
+    for (uint32_t i = 1; i < array_size; ++i)
+        root = insert(root, arr[i]);
+
+    uint32_t i = 0;
+    storeSorted(root, arr, i);
+    destroyTree(root);
+}
+
+template<typename T>
+void Sorter<T>::storeSorted(Sorter::Node *root, T *arr, uint32_t &i)
+{
+    if (root != nullptr)
+    {
+        storeSorted(root->left, arr, i);
+        arr[i] = root->key;
+        ++i;
+        storeSorted(root->right, arr, i);
+    }
+}
+
+template<typename T>
+typename Sorter<T>::Node *Sorter<T>::insert(Sorter::Node *node, T key)
+{
+    if (node == nullptr)
+        return newNode(key);
+
+    if (key < node->key) {
+        node->left = insert(node->left, key);
+    } else if (key > node->key) {
+        node->right = insert(node->right, key);
+    }
+    return node;
+}
+
+template<typename T>
+typename Sorter<T>::Node *Sorter<T>::newNode(T item)
+{
+    Node *temp = new Node;
+    temp->key = item;
+    temp->left = temp->right = nullptr;
+    return temp;
+}
+
+template<typename T>
+void Sorter<T>::destroyTree(Sorter::Node *node)
+{
+    if(node != nullptr)
+    {
+        destroyTree(node->left);
+        destroyTree(node->right);
+        delete node;
+    }
+}
+
+template<typename T>
+void Sorter<T>::pancakeSort(T *arr, const uint32_t &array_size)
+{
+    for (uint32_t i = array_size, max_i; i > 1; --i)
+    {
+        max_i = findMax(arr, i);
+
+        if (max_i != i - 1)
+        {
+            flip(arr, max_i);
+            flip(arr, i - 1);
+        }
+    }
+}
+
+template<typename T>
+uint32_t Sorter<T>::findMax(T *arr, const uint32_t& array_size)
+{
+    uint32_t mi = 0;
+    for (uint32_t i = 0; i < array_size; ++i)
+        if (arr[i] > arr[mi])
+            mi = i;
+    return mi;
+}
+
+template<typename T>
+void Sorter<T>::flip(T *arr, uint32_t i)
+{
+    T temp;
+    for(uint32_t start = 0; start < i; ++start, --i)
+    {
+        temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+template<typename T>
+void Sorter<T>::stoogesort(T *arr, const uint32_t &array_size)
+{
+    stoogesort(arr, 0, array_size - 1);
+}
+
+template<typename T>
+void Sorter<T>::stoogesort(T *arr, const uint32_t &left, const uint32_t &right)
+{
+    if (left >= right)
+        return;
+
+    if (arr[left] > arr[right])
+    {
+        T t = arr[left];
+        arr[left] = arr[right];
+        arr[right] = t;
+    }
+
+    if (right - left + 1 > 2)
+    {
+        uint32_t t = (right - left + 1) / 3;
+        stoogesort(arr, left, right - t);
+        stoogesort(arr, left + t, right);
+        stoogesort(arr, left, right - t);
+    }
+}
