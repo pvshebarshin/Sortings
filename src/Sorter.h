@@ -1,10 +1,7 @@
 #ifndef SORTINGS_SORTER_H
 #define SORTINGS_SORTER_H
 
-#include <stdint-gcc.h>
-#include <variant>
-#include <cmath>
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 template <typename T>
 class Sorter {
@@ -73,11 +70,14 @@ public:
     // Пока некорректно сортирует массивы с большыми числами
     void treeSort(T *arr, const uint32_t &array_size);
 
-    // Сортировка Пирог
+    // Сортировка Блин
     void pancakeSort(T *arr, const uint32_t &array_size);
 
-    // Блуждающая сортировка
-    void stoogesort(T *arr, const uint32_t &array_size);
+    // Блуждающая Сортировка
+    void stoogeSort(T *arr, const uint32_t &array_size);
+
+    // Циклическая Сортировка
+    void cycleSort(T *arr, const uint32_t &array_size);
 
 private:
 
@@ -103,14 +103,16 @@ private:
 
     void insertion(T *arr, const uint32_t &left, const uint32_t &right);
 
-    void strandSort(std::list<T> &ip, std::list<T> &op);
+    void strandSort(std::list<T>& input, std::list<T>& output);
 
-    union UNION {
+    union UNION
+    {
         unsigned int value;
         unsigned char mas[4];
     };
 
-    struct Node {
+    struct Node
+    {
         T key;
         Node *left, *right;
     };
@@ -127,7 +129,7 @@ private:
 
     void flip(T* arr, uint32_t i);
 
-    void stoogesort(T *arr, const uint32_t &left, const uint32_t &right);
+    void stoogeSort(T *arr, const uint32_t &left, const uint32_t &right);
 
 };
 

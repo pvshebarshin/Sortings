@@ -1,4 +1,3 @@
-#include <cmath>
 #include "Sorter.h"
 
 template<typename T>
@@ -537,26 +536,26 @@ void Sorter<T>::strandSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::strandSort(std::list<T> &input, std::list<T> &output)
+void Sorter<T>::strandSort(std::list<T>& input, std::list<T>& output)
 {
-    if (input.empty())
-        return;
+    if (!input.empty())
+    {
+        std::list<T> temp;
+        temp.push_back(input.front());
+        input.pop_front();
 
-    std::list<T> temp;
-    temp.push_back(input.front());
-    input.pop_front();
+        typename std::list<T>::iterator it = input.begin();
+        while (it != input.end())
+            if (*it > temp.back()) {
+                temp.push_back(*it);
+                it = input.erase(it);
+            } else {
+                ++it;
+            }
 
-    typename std::list<T>::iterator it = input.begin();
-    while (it != input.end())
-        if (*it > temp.back()) {
-            temp.push_back(*it);
-            it = input.erase(it);
-        } else {
-            ++it;
-        }
-
-    output.merge(temp);
-    strandSort(input, output);
+        output.merge(temp);
+        strandSort(input, output);
+    }
 }
 
 template<typename T>
@@ -596,6 +595,7 @@ typename Sorter<T>::Node *Sorter<T>::insert(Sorter::Node *node, T key)
     } else if (key > node->key) {
         node->right = insert(node->right, key);
     }
+
     return node;
 }
 
@@ -637,11 +637,11 @@ void Sorter<T>::pancakeSort(T *arr, const uint32_t &array_size)
 template<typename T>
 uint32_t Sorter<T>::findMax(T *arr, const uint32_t& array_size)
 {
-    uint32_t mi = 0;
+    uint32_t max_i = 0;
     for (uint32_t i = 0; i < array_size; ++i)
-        if (arr[i] > arr[mi])
-            mi = i;
-    return mi;
+        if (arr[i] > arr[max_i])
+            max_i = i;
+    return max_i;
 }
 
 template<typename T>
@@ -657,29 +657,80 @@ void Sorter<T>::flip(T *arr, uint32_t i)
 }
 
 template<typename T>
-void Sorter<T>::stoogesort(T *arr, const uint32_t &array_size)
+void Sorter<T>::stoogeSort(T *arr, const uint32_t &array_size)
 {
-    stoogesort(arr, 0, array_size - 1);
+    stoogeSort(arr, 0, array_size - 1);
 }
 
 template<typename T>
-void Sorter<T>::stoogesort(T *arr, const uint32_t &left, const uint32_t &right)
+void Sorter<T>::stoogeSort(T *arr, const uint32_t &left, const uint32_t &right)
 {
-    if (left >= right)
-        return;
-
-    if (arr[left] > arr[right])
+    if (left < right)
     {
-        T t = arr[left];
-        arr[left] = arr[right];
-        arr[right] = t;
-    }
+        if (arr[left] > arr[right])
+        {
+            T t = arr[left];
+            arr[left] = arr[right];
+            arr[right] = t;
+        }
 
-    if (right - left + 1 > 2)
-    {
-        uint32_t t = (right - left + 1) / 3;
-        stoogesort(arr, left, right - t);
-        stoogesort(arr, left + t, right);
-        stoogesort(arr, left, right - t);
+        if (right - left + 1 > 2)
+        {
+            uint32_t t = (right - left + 1) / 3;
+            stoogeSort(arr, left, right - t);
+            stoogeSort(arr, left + t, right);
+            stoogeSort(arr, left, right - t);
+        }
     }
 }
+
+template<typename T>
+void Sorter<T>::cycleSort(T *arr, const uint32_t &array_size)
+{
+    uint32_t writes = 0, i, j, pos;
+    T temp, t;
+
+    for (uint32_t index = 0; index <= array_size - 2; ++index)
+    {
+        temp = arr[index];
+        pos = index;
+        for (i = index + 1; i < array_size; ++i)
+            if (arr[i] < temp)
+                ++pos;
+
+        if (pos == index)
+            continue;
+
+        while (temp == arr[pos])
+            ++pos;
+
+        if (pos != index)
+        {
+            t = temp;
+            temp = arr[pos];
+            arr[pos] = t;
+            ++writes;
+        }
+
+        while (pos != index)
+        {
+            pos = index;
+
+            for (j = index + 1; j < array_size; ++j)
+                if (arr[j] < temp)
+                    ++pos;
+
+            while (temp == arr[pos])
+                ++pos;
+
+            if (temp != arr[pos])
+            {
+                t = temp;
+                temp = arr[pos];
+                arr[pos] = t;
+                ++writes;
+            }
+        }
+    }
+}
+
