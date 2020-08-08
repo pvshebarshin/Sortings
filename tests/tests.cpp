@@ -1023,3 +1023,67 @@ TEST_F(SortingsTests, cycleSort_Test3)
     for(uint32_t i = 0; i < size; ++i)
         ASSERT_EQ(A1[i], B1[i]);
 }
+
+TEST_F(SortingsTests, introSort_Test1)
+{
+    uint32_t size = 10;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 666);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size,  666);
+    iSorter->introSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test2)
+{
+    uint32_t size = 100;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 3);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size,  3);
+    iSorter->introSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test3)
+{
+    uint32_t size = 1000;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 6666);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size,  6666);
+    iSorter->introSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test4)
+{
+    uint32_t size = 10000;
+    A = new int[size];
+    B = new int[size];
+
+    fillIntMas(A, size, 8);
+    iSorter->simpleSort(A, size);
+
+    fillIntMas(B, size,  8);
+    iSorter->introSort(B, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A[i], B[i]);
+}

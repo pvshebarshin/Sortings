@@ -33,7 +33,7 @@ void Sorter<T>::countingSort(int* numbers, const uint32_t& array_size)
 }
 
 template<typename T>
-void Sorter<T>::radixSort(int *numbers, const uint32_t &array_size)
+void Sorter<T>::radixSort(int* numbers, const uint32_t& array_size)
 {
     UNION* un_mass = new UNION[array_size];
 
@@ -72,13 +72,13 @@ void Sorter<T>::radixSort(int *numbers, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::mergeSort(T *arr, const uint32_t& length)
+void Sorter<T>::mergeSort(T* arr, const uint32_t& array_size)
 {
-    divide_and_merge(arr, 0, length - 1);
+    divide_and_merge(arr, 0, array_size - 1);
 }
 
 template<typename T>
-void Sorter<T>::merge(T *arr, uint32_t first, uint32_t second, uint32_t end)
+void Sorter<T>::merge(T* arr, const uint32_t& first, const uint32_t& second, const uint32_t& end)
 {
     uint32_t current_number = 0,
     index_left = first,
@@ -120,7 +120,7 @@ void Sorter<T>::merge(T *arr, uint32_t first, uint32_t second, uint32_t end)
 }
 
 template<typename T>
-void Sorter<T>::divide_and_merge(T *arr, uint32_t left, uint32_t right)
+void Sorter<T>::divide_and_merge(T* arr, const uint32_t& left, const uint32_t& right)
 {
     if(left == right)
         return;
@@ -135,7 +135,7 @@ void Sorter<T>::divide_and_merge(T *arr, uint32_t left, uint32_t right)
         return;
     }
 
-    uint32_t index = (right + left) / 2;
+    uint32_t index = left + (right - left) / 2;
 
     divide_and_merge(arr, left, index);
     divide_and_merge(arr, index + 1, right);
@@ -143,13 +143,13 @@ void Sorter<T>::divide_and_merge(T *arr, uint32_t left, uint32_t right)
 }
 
 template<typename T>
-void Sorter<T>::heapSort(T *numbers, const uint32_t& array_size)
+void Sorter<T>::heapSort(T* numbers, const uint32_t& array_size)
 {
     heapSort(numbers, 0, array_size);
 }
 
 template<typename T>
-void Sorter<T>::heapSort(T *numbers, const uint32_t& begin, const uint32_t& end)
+void Sorter<T>::heapSort(T* numbers, const uint32_t& begin, const uint32_t& end)
 {
     uint32_t i;
     T t;
@@ -171,7 +171,7 @@ void Sorter<T>::heapSort(T *numbers, const uint32_t& begin, const uint32_t& end)
 }
 
 template<typename T>
-void Sorter<T>::heaping(T *numbers, uint32_t begin, const uint32_t& end)
+void Sorter<T>::heaping(T* numbers, uint32_t begin, const uint32_t& end)
 {
     T save = numbers[begin];
     uint32_t k;
@@ -188,13 +188,13 @@ void Sorter<T>::heaping(T *numbers, uint32_t begin, const uint32_t& end)
 }
 
 template<typename T>
-void Sorter<T>::quickSort(T *numbers, const uint32_t& array_size)
+void Sorter<T>::quickSort(T* numbers, const uint32_t& array_size)
 {
     quickSort(numbers, 0, array_size - 1);
 }
 
 template<typename T>
-void Sorter<T>::quickSort(T *numbers, uint32_t left, uint32_t right)
+void Sorter<T>::quickSort(T* numbers, const uint32_t& left, const uint32_t& right)
 {
     if (left < right)
     {
@@ -207,7 +207,7 @@ void Sorter<T>::quickSort(T *numbers, uint32_t left, uint32_t right)
 }
 
 template<typename T>
-uint32_t Sorter<T>::rerange(T *numbers, uint32_t left, uint32_t right, uint32_t x)
+uint32_t Sorter<T>::rerange(T* numbers, const uint32_t& left, const uint32_t& right, const uint32_t& x)
 {
     T pivot = numbers[x];
     uint32_t i = left - 1;
@@ -215,13 +215,13 @@ uint32_t Sorter<T>::rerange(T *numbers, uint32_t left, uint32_t right, uint32_t 
     T t;
     while (true)
     {
-        do
+        do {
             ++i;
-        while (numbers[i] < pivot);
+        } while (numbers[i] < pivot);
 
-        do
+        do {
             --j;
-        while (numbers[j] > pivot);
+        } while (numbers[j] > pivot);
 
         if (i >= j)
             return j;
@@ -233,7 +233,7 @@ uint32_t Sorter<T>::rerange(T *numbers, uint32_t left, uint32_t right, uint32_t 
 }
 
 template<typename T>
-void Sorter<T>::bubbleSort(T *arr, const uint32_t& array_size)
+void Sorter<T>::bubbleSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i, j;
     T t;
@@ -249,7 +249,7 @@ void Sorter<T>::bubbleSort(T *arr, const uint32_t& array_size)
 }
 
 template<typename T>
-void Sorter<T>::shakerSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::shakerSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i;
     T t;
@@ -279,7 +279,7 @@ void Sorter<T>::shakerSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::combSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::combSort(T* arr, const uint32_t& array_size)
 {
     T t;
     uint32_t temp_shift, N = array_size, i;
@@ -308,7 +308,7 @@ void Sorter<T>::combSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::shellSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::shellSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i, j, step;
     T t;
@@ -329,7 +329,7 @@ void Sorter<T>::shellSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::oddEvenSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::oddEvenSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i, j;
     T t;
@@ -344,7 +344,7 @@ void Sorter<T>::oddEvenSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::simpleSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::simpleSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i, j;
     T t;
@@ -360,7 +360,7 @@ void Sorter<T>::simpleSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::selectionSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::selectionSort(T* arr, const uint32_t& array_size)
 {
     uint32_t min_index, i, j;
     T t;
@@ -383,7 +383,7 @@ void Sorter<T>::selectionSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::insertionSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i, j;
     T t;
@@ -398,7 +398,7 @@ void Sorter<T>::insertionSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::gnomeSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::gnomeSort(T* arr, const uint32_t& array_size)
 {
     uint32_t i = 0;
     T t;
@@ -418,13 +418,13 @@ void Sorter<T>::gnomeSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::bitonicSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::bitonicSort(T* arr, const uint32_t& array_size)
 {
     bitonicSort(arr, 0, array_size, 1);
 }
 
 template<typename T>
-void Sorter<T>::bitonicSort(T* arr, uint32_t begin, uint32_t end, int marker)
+void Sorter<T>::bitonicSort(T* arr, const uint32_t& begin, const uint32_t& end, const int& marker)
 {
     if (end > 1)
     {
@@ -436,7 +436,7 @@ void Sorter<T>::bitonicSort(T* arr, uint32_t begin, uint32_t end, int marker)
 }
 
 template<typename T>
-void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end, int marker)
+void Sorter<T>::bitonicMerge(T *arr, const uint32_t& begin, const uint32_t& end, const int& marker)
 {
     if (end > 1)
     {
@@ -457,7 +457,7 @@ void Sorter<T>::bitonicMerge(T *arr, uint32_t begin, uint32_t end, int marker)
 }
 
 template<typename T>
-void Sorter<T>::bogoSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::bogoSort(T* arr, const uint32_t& array_size)
 {
     T t, temp;
     uint32_t index;
@@ -475,14 +475,14 @@ void Sorter<T>::bogoSort(T *arr, const uint32_t &array_size)
 template<typename T>
 bool Sorter<T>::isGood(T *arr, uint32_t array_size)
 {
-    while (array_size-- > 0)
+    for(--array_size; array_size > 0; --array_size)
         if (arr[array_size - 1] > arr[array_size])
             return false;
     return true;
 }
 
 template<typename T>
-void Sorter<T>::timSort(T *arr, const uint32_t& array_size)
+void Sorter<T>::timSort(T* arr, const uint32_t& array_size)
 {
     for (uint32_t i = 0; i < array_size; i += RUN)
         if(i + 31 < array_size - 1) {
@@ -506,7 +506,7 @@ void Sorter<T>::timSort(T *arr, const uint32_t& array_size)
 }
 
 template<typename T>
-void Sorter<T>::insertion(T *arr, const uint32_t& left, const uint32_t& right)
+void Sorter<T>::insertion(T* arr, const uint32_t& left, const uint32_t& right)
 {
     T t;
     uint32_t i, j;
@@ -520,7 +520,7 @@ void Sorter<T>::insertion(T *arr, const uint32_t& left, const uint32_t& right)
 }
 
 template<typename T>
-void Sorter<T>::strandSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::strandSort(T* arr, const uint32_t& array_size)
 {
     std::list<T> input, output;
     for(uint32_t i = 0; i < array_size; ++i)
@@ -559,7 +559,7 @@ void Sorter<T>::strandSort(std::list<T>& input, std::list<T>& output)
 }
 
 template<typename T>
-void Sorter<T>::treeSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::treeSort(T* arr, const uint32_t& array_size)
 {
     struct Node *root = nullptr;
 
@@ -573,7 +573,7 @@ void Sorter<T>::treeSort(T *arr, const uint32_t &array_size)
 }
 
 template<typename T>
-void Sorter<T>::storeSorted(Sorter::Node *root, T *arr, uint32_t &i)
+void Sorter<T>::storeSorted(Sorter::Node *root, T* arr, uint32_t& i)
 {
     if (root != nullptr)
     {
@@ -585,7 +585,7 @@ void Sorter<T>::storeSorted(Sorter::Node *root, T *arr, uint32_t &i)
 }
 
 template<typename T>
-typename Sorter<T>::Node *Sorter<T>::insert(Sorter::Node *node, T key)
+typename Sorter<T>::Node *Sorter<T>::insert(Sorter::Node* node, T key)
 {
     if (node == nullptr)
         return newNode(key);
@@ -609,7 +609,7 @@ typename Sorter<T>::Node *Sorter<T>::newNode(T item)
 }
 
 template<typename T>
-void Sorter<T>::destroyTree(Sorter::Node *node)
+void Sorter<T>::destroyTree(Sorter::Node* node)
 {
     if(node != nullptr)
     {
@@ -620,7 +620,7 @@ void Sorter<T>::destroyTree(Sorter::Node *node)
 }
 
 template<typename T>
-void Sorter<T>::pancakeSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::pancakeSort(T *arr, const uint32_t& array_size)
 {
     for (uint32_t i = array_size, max_i; i > 1; --i)
     {
@@ -657,13 +657,13 @@ void Sorter<T>::flip(T *arr, uint32_t i)
 }
 
 template<typename T>
-void Sorter<T>::stoogeSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::stoogeSort(T *arr, const uint32_t& array_size)
 {
     stoogeSort(arr, 0, array_size - 1);
 }
 
 template<typename T>
-void Sorter<T>::stoogeSort(T *arr, const uint32_t &left, const uint32_t &right)
+void Sorter<T>::stoogeSort(T *arr, const uint32_t& left, const uint32_t& right)
 {
     if (left < right)
     {
@@ -685,7 +685,7 @@ void Sorter<T>::stoogeSort(T *arr, const uint32_t &left, const uint32_t &right)
 }
 
 template<typename T>
-void Sorter<T>::cycleSort(T *arr, const uint32_t &array_size)
+void Sorter<T>::cycleSort(T *arr, const uint32_t& array_size)
 {
     uint32_t writes = 0, i, j, pos;
     T temp, t;
@@ -731,6 +731,91 @@ void Sorter<T>::cycleSort(T *arr, const uint32_t &array_size)
                 ++writes;
             }
         }
+    }
+}
+
+template<typename T>
+void Sorter<T>::introSort(T* arr, const uint32_t& array_size)
+{
+    introSort( arr, 0, array_size - 1, (int(2*log(double(array_size)))));
+    insertion(arr, array_size);
+}
+
+template<typename T>
+void Sorter<T>::insertion(T *arr, const uint32_t& array_size)
+{
+    uint32_t i, j, save;
+    for (i = 1; i < array_size; ++i)
+    {
+        save = arr[i];
+        for (j = i; j >= 1 && arr[j - 1] > save; --j)
+            arr[j] = arr[j - 1];
+        arr[j] = save;
+    }
+}
+
+template<typename T>
+void Sorter<T>::introSort(T *arr, const uint32_t& first, uint32_t last, const int& depth)
+{
+    uint32_t pivot;
+    while(last - first > 0)
+    {
+        if(depth == 0) {
+            heapSort(&arr[first], first, last - first + 1);
+        } else {
+            if(isSorted(arr))
+                break;
+            pivot = partition(arr, first, last);
+            introSort(arr, pivot+1, last, depth - 1);
+            last = pivot - 1;
+        }
+    }
+}
+
+template<typename T>
+uint32_t Sorter<T>::partition(T *arr, uint32_t first, const uint32_t& last)
+{
+    uint32_t pivot,
+    mid = first + (last - first) / 2;
+    T t;
+
+    pivot = arr[first] > arr[mid] ? first : mid;
+
+    if(arr[pivot] > arr[last])
+        pivot = last;
+
+    t = arr[pivot];
+    arr[pivot] = arr[first];
+    arr[first] = t;
+
+    pivot = first;
+
+    while (first < last)
+    {
+        if (arr[first] <= arr[last])
+        {
+            t = arr[pivot];
+            arr[pivot] = arr[first];
+            arr[first] = t;
+            ++pivot;
+        }
+        ++first;
+    }
+
+    t = arr[pivot];
+    arr[pivot] = arr[last];
+    arr[last] = t;
+
+    return pivot;
+}
+
+template<typename T>
+bool Sorter<T>::isSorted(const T *arr)
+{
+    if(arr[0] > arr[1]){
+        return false;
+    } else {
+        return true;
     }
 }
 
