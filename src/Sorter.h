@@ -80,7 +80,6 @@ public:
     void cycleSort(T* arr, const uint32_t& array_size);
 
     // Интроспективная Сортировка
-    // Сортирует только целые числа
     void introSort(T* arr, const uint32_t& array_size);
 
 private:

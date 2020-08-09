@@ -35,14 +35,14 @@ namespace
         void fillIntMas(int* mas, const uint32_t& size, const uint32_t& r)
         {
             srand(r);
-            for (int i = 0; i < size; ++i)
+            for (uint32_t i = 0; i < size; ++i)
                 mas[i] = rand();
         }
         void fillfloatMas(float* mas, const uint32_t& size, const uint32_t& r)
         {
             srand(r);
-            for (int i = 0; i < size; ++i)
-                mas[i] = rand() / RAND_MAX + rand();
+            for (uint32_t i = 0; i < size; ++i)
+                mas[i] = (float)rand() / RAND_MAX + rand();
         }
     };
 }
@@ -1086,4 +1086,52 @@ TEST_F(SortingsTests, introSort_Test4)
 
     for(uint32_t i = 0; i < size; ++i)
         ASSERT_EQ(A[i], B[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test5)
+{
+    uint32_t size = 10;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 21);
+    fSorter->cycleSort(A1, size);
+
+    fillfloatMas(B1, size, 21);
+    fSorter->introSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test6)
+{
+    uint32_t size = 100;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 2);
+    fSorter->cycleSort(A1, size);
+
+    fillfloatMas(B1, size, 2);
+    fSorter->introSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}
+
+TEST_F(SortingsTests, introSort_Test7)
+{
+    uint32_t size = 500;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillfloatMas(A1, size, 12);
+    fSorter->cycleSort(A1, size);
+
+    fillfloatMas(B1, size, 12);
+    fSorter->introSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
 }

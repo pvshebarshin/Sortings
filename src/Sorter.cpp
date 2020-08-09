@@ -744,13 +744,14 @@ void Sorter<T>::introSort(T* arr, const uint32_t& array_size)
 template<typename T>
 void Sorter<T>::insertion(T *arr, const uint32_t& array_size)
 {
-    uint32_t i, j, save;
+    uint32_t i, j;
+    T t;
     for (i = 1; i < array_size; ++i)
     {
-        save = arr[i];
-        for (j = i; j >= 1 && arr[j - 1] > save; --j)
+        t = arr[i];
+        for (j = i; j >= 1 && arr[j - 1] > t; --j)
             arr[j] = arr[j - 1];
-        arr[j] = save;
+        arr[j] = t;
     }
 }
 
@@ -766,7 +767,7 @@ void Sorter<T>::introSort(T *arr, const uint32_t& first, uint32_t last, const in
             if(isSorted(arr))
                 break;
             pivot = partition(arr, first, last);
-            introSort(arr, pivot+1, last, depth - 1);
+            introSort(arr, pivot + 1, last, depth - 1);
             last = pivot - 1;
         }
     }
