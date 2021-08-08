@@ -1,7 +1,6 @@
 #include <algorithm>
-#include "../src/Sorter.cpp"
-
-using testing::Eq;
+#include <gtest/gtest.h>
+#include "../src/Sorter.h"
 
 namespace
 {
