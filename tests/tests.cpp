@@ -37,7 +37,7 @@ namespace
             for (uint32_t i = 0; i < size; ++i)
                 mas[i] = rand();
         }
-        void fillfloatMas(float* mas, const uint32_t& size, const uint32_t& r)
+        static void fillFloatMas(float* mas, const uint32_t& size, const uint32_t& r)
         {
             srand(r);
             for (uint32_t i = 0; i < size; ++i)
@@ -166,10 +166,10 @@ TEST_F(SortingsTests, mergeSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->mergeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -182,10 +182,10 @@ TEST_F(SortingsTests, mergeSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 44);
+    fillFloatMas(A1, size, 44);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 44);
+    fillFloatMas(B1, size, 44);
     fSorter->mergeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -198,10 +198,10 @@ TEST_F(SortingsTests, mergeSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 41);
+    fillFloatMas(A1, size, 41);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 41);
+    fillFloatMas(B1, size, 41);
     fSorter->mergeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -214,10 +214,10 @@ TEST_F(SortingsTests, heapSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 133);
+    fillFloatMas(A1, size, 133);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 133);
+    fillFloatMas(B1, size, 133);
     fSorter->heapSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -229,10 +229,10 @@ TEST_F(SortingsTests, heapSort_Test2) {
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 1313);
+    fillFloatMas(A1, size, 1313);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 1313);
+    fillFloatMas(B1, size, 1313);
     fSorter->heapSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -245,10 +245,10 @@ TEST_F(SortingsTests, heapSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 1133);
+    fillFloatMas(A1, size, 1133);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 1133);
+    fillFloatMas(B1, size, 1133);
     fSorter->heapSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -261,10 +261,10 @@ TEST_F(SortingsTests, quickSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->quickSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -277,10 +277,10 @@ TEST_F(SortingsTests, quickSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 42);
+    fillFloatMas(A1, size, 42);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 42);
+    fillFloatMas(B1, size, 42);
     fSorter->quickSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -293,10 +293,10 @@ TEST_F(SortingsTests, quickSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 411);
+    fillFloatMas(A1, size, 411);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 411);
+    fillFloatMas(B1, size, 411);
     fSorter->quickSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -309,10 +309,10 @@ TEST_F(SortingsTests, bubbleSort_Test)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->quickSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->bubbleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -325,10 +325,10 @@ TEST_F(SortingsTests, shakerSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->shakerSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -341,10 +341,10 @@ TEST_F(SortingsTests, shakerSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 14);
+    fillFloatMas(A1, size, 14);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 14);
+    fillFloatMas(B1, size, 14);
     fSorter->shakerSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -357,10 +357,10 @@ TEST_F(SortingsTests, shakerSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 1);
+    fillFloatMas(A1, size, 1);
     fSorter->simpleSort(A1, size);
 
-    fillfloatMas(B1, size, 1);
+    fillFloatMas(B1, size, 1);
     fSorter->shakerSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -373,10 +373,10 @@ TEST_F(SortingsTests, combSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->combSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->bubbleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -389,10 +389,10 @@ TEST_F(SortingsTests, combSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 24);
+    fillFloatMas(A1, size, 24);
     fSorter->combSort(A1, size);
 
-    fillfloatMas(B1, size, 24);
+    fillFloatMas(B1, size, 24);
     fSorter->bubbleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -405,10 +405,10 @@ TEST_F(SortingsTests, combSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 74);
+    fillFloatMas(A1, size, 74);
     fSorter->combSort(A1, size);
 
-    fillfloatMas(B1, size, 74);
+    fillFloatMas(B1, size, 74);
     fSorter->bubbleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -421,10 +421,10 @@ TEST_F(SortingsTests, shellSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->shellSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->simpleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -437,10 +437,10 @@ TEST_F(SortingsTests, shellSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 24);
+    fillFloatMas(A1, size, 24);
     fSorter->shellSort(A1, size);
 
-    fillfloatMas(B1, size, 24);
+    fillFloatMas(B1, size, 24);
     fSorter->simpleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -453,10 +453,10 @@ TEST_F(SortingsTests, shellSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 43);
+    fillFloatMas(A1, size, 43);
     fSorter->shellSort(A1, size);
 
-    fillfloatMas(B1, size, 43);
+    fillFloatMas(B1, size, 43);
     fSorter->simpleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -469,10 +469,10 @@ TEST_F(SortingsTests, oddEvenSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->oddEvenSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -485,10 +485,10 @@ TEST_F(SortingsTests, oddEvenSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 94);
+    fillFloatMas(A1, size, 94);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 94);
+    fillFloatMas(B1, size, 94);
     fSorter->oddEvenSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -501,10 +501,10 @@ TEST_F(SortingsTests, oddEvenSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->oddEvenSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -517,10 +517,10 @@ TEST_F(SortingsTests, simpleSort_Test)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->simpleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -533,10 +533,10 @@ TEST_F(SortingsTests, selectionSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->selectionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -549,10 +549,10 @@ TEST_F(SortingsTests, selectionSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 40);
+    fillFloatMas(A1, size, 40);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 40);
+    fillFloatMas(B1, size, 40);
     fSorter->selectionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -565,10 +565,10 @@ TEST_F(SortingsTests, selectionSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 400);
+    fillFloatMas(A1, size, 400);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 400);
+    fillFloatMas(B1, size, 400);
     fSorter->selectionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -581,10 +581,10 @@ TEST_F(SortingsTests, insertionSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->insertionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -597,10 +597,10 @@ TEST_F(SortingsTests, insertionSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 54);
+    fillFloatMas(A1, size, 54);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 54);
+    fillFloatMas(B1, size, 54);
     fSorter->insertionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -613,10 +613,10 @@ TEST_F(SortingsTests, insertionSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 41);
+    fillFloatMas(A1, size, 41);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 41);
+    fillFloatMas(B1, size, 41);
     fSorter->insertionSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -629,10 +629,10 @@ TEST_F(SortingsTests, gnomeSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->gnomeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -645,10 +645,10 @@ TEST_F(SortingsTests, gnomeSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 47);
+    fillFloatMas(A1, size, 47);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 47);
+    fillFloatMas(B1, size, 47);
     fSorter->gnomeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -661,10 +661,10 @@ TEST_F(SortingsTests, gnomeSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 477);
+    fillFloatMas(A1, size, 477);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 477);
+    fillFloatMas(B1, size, 477);
     fSorter->gnomeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -677,10 +677,10 @@ TEST_F(SortingsTests, bitonicSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->bitonicSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -693,10 +693,10 @@ TEST_F(SortingsTests, bitonicSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 512);
+    fillFloatMas(A1, size, 512);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 512);
+    fillFloatMas(B1, size, 512);
     fSorter->bitonicSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -709,10 +709,10 @@ TEST_F(SortingsTests, bitonicSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4096);
+    fillFloatMas(A1, size, 4096);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4096);
+    fillFloatMas(B1, size, 4096);
     fSorter->bitonicSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -725,10 +725,10 @@ TEST_F(SortingsTests, bogoSort_Test)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 4);
+    fillFloatMas(A1, size, 4);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 4);
+    fillFloatMas(B1, size, 4);
     fSorter->bogoSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -757,10 +757,10 @@ TEST_F(SortingsTests, timSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 6);
+    fillFloatMas(A1, size, 6);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 6);
+    fillFloatMas(B1, size, 6);
     fSorter->timSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -773,10 +773,10 @@ TEST_F(SortingsTests, timSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 16);
+    fillFloatMas(A1, size, 16);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 16);
+    fillFloatMas(B1, size, 16);
     fSorter->timSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -789,10 +789,10 @@ TEST_F(SortingsTests, strandSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 16);
+    fillFloatMas(A1, size, 16);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 16);
+    fillFloatMas(B1, size, 16);
     fSorter->strandSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -805,10 +805,10 @@ TEST_F(SortingsTests, strandSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 11);
+    fillFloatMas(A1, size, 11);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 11);
+    fillFloatMas(B1, size, 11);
     fSorter->strandSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -821,10 +821,10 @@ TEST_F(SortingsTests, strandSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 6);
+    fillFloatMas(A1, size, 6);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 6);
+    fillFloatMas(B1, size, 6);
     fSorter->strandSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -837,10 +837,10 @@ TEST_F(SortingsTests, treeSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 16);
+    fillFloatMas(A1, size, 16);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 16);
+    fillFloatMas(B1, size, 16);
     fSorter->treeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -853,10 +853,10 @@ TEST_F(SortingsTests, treeSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 106);
+    fillFloatMas(A1, size, 106);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 106);
+    fillFloatMas(B1, size, 106);
     fSorter->treeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -869,10 +869,10 @@ TEST_F(SortingsTests, treeSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->treeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -885,10 +885,10 @@ TEST_F(SortingsTests, pancakeSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 16);
+    fillFloatMas(A1, size, 16);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 16);
+    fillFloatMas(B1, size, 16);
     fSorter->pancakeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -901,10 +901,10 @@ TEST_F(SortingsTests, pancakeSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 106);
+    fillFloatMas(A1, size, 106);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 106);
+    fillFloatMas(B1, size, 106);
     fSorter->pancakeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -917,10 +917,10 @@ TEST_F(SortingsTests, pancakeSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->pancakeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -933,10 +933,10 @@ TEST_F(SortingsTests, stoogeSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 16);
+    fillFloatMas(A1, size, 16);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 16);
+    fillFloatMas(B1, size, 16);
     fSorter->stoogeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -949,10 +949,10 @@ TEST_F(SortingsTests, stoogeSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 106);
+    fillFloatMas(A1, size, 106);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 106);
+    fillFloatMas(B1, size, 106);
     fSorter->stoogeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -965,10 +965,10 @@ TEST_F(SortingsTests, stoogeSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->stoogeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -981,10 +981,10 @@ TEST_F(SortingsTests, cycleSort_Test1)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 1);
+    fillFloatMas(A1, size, 1);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 1);
+    fillFloatMas(B1, size, 1);
     fSorter->cycleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -997,10 +997,10 @@ TEST_F(SortingsTests, cycleSort_Test2)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 106);
+    fillFloatMas(A1, size, 106);
     fSorter->bubbleSort(A1, size);
 
-    fillfloatMas(B1, size, 106);
+    fillFloatMas(B1, size, 106);
     fSorter->cycleSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -1013,10 +1013,10 @@ TEST_F(SortingsTests, cycleSort_Test3)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->cycleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->pancakeSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -1093,10 +1093,10 @@ TEST_F(SortingsTests, introSort_Test5)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 21);
+    fillFloatMas(A1, size, 21);
     fSorter->cycleSort(A1, size);
 
-    fillfloatMas(B1, size, 21);
+    fillFloatMas(B1, size, 21);
     fSorter->introSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -1109,10 +1109,10 @@ TEST_F(SortingsTests, introSort_Test6)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 2);
+    fillFloatMas(A1, size, 2);
     fSorter->cycleSort(A1, size);
 
-    fillfloatMas(B1, size, 2);
+    fillFloatMas(B1, size, 2);
     fSorter->introSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
@@ -1125,10 +1125,10 @@ TEST_F(SortingsTests, introSort_Test7)
     A1 = new float[size];
     B1 = new float[size];
 
-    fillfloatMas(A1, size, 12);
+    fillFloatMas(A1, size, 12);
     fSorter->cycleSort(A1, size);
 
-    fillfloatMas(B1, size, 12);
+    fillFloatMas(B1, size, 12);
     fSorter->introSort(B1, size);
 
     for(uint32_t i = 0; i < size; ++i)
