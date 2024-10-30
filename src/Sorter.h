@@ -3,7 +3,7 @@
 
 #include <list>
 
-template <typename T>
+template<typename T>
 class Sorter {
 public:
 
@@ -476,16 +476,31 @@ void Sorter<T>::shellSort(T* arr, const uint32_t& array_size)
 template<typename T>
 void Sorter<T>::oddEvenSort(T* arr, const uint32_t& array_size)
 {
-    uint32_t i, j;
+    uint32_t i;
     T t;
-    for (i = 0; i < array_size; ++i)
-        for (j = i % 2 ? 0 : 1; j + 1 < array_size; j += 2)
-            if (arr[j] > arr[j + 1])
-            {
-                t = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = t;
+    bool isSorted = false;
+
+    while (!isSorted) {
+        isSorted = true;
+
+        for (i = 1; i < array_size - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                t = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = t;
+                isSorted = false;
             }
+        }
+
+        for (i = 0; i < array_size - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                t = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = t;
+                isSorted = false;
+            }
+        }
+    }
 }
 
 template<typename T>
