@@ -1134,3 +1134,19 @@ TEST_F(SortingsTests, introSort_Test7)
     for(uint32_t i = 0; i < size; ++i)
         ASSERT_EQ(A1[i], B1[i]);
 }
+
+TEST_F(SortingsTests, bozoSort_Test)
+{
+    uint32_t size = 10;
+    A1 = new float[size];
+    B1 = new float[size];
+
+    fillFloatMas(A1, size, 69);
+    fSorter->bubbleSort(A1, size);
+
+    fillFloatMas(B1, size, 69);
+    fSorter->bozoSort(B1, size);
+
+    for(uint32_t i = 0; i < size; ++i)
+        ASSERT_EQ(A1[i], B1[i]);
+}

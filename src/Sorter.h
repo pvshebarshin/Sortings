@@ -82,6 +82,9 @@ public:
     // Интроспективная Сортировка
     void introSort(T* arr, const uint32_t& array_size);
 
+    // Клоунская сортировка
+    void bozoSort(T* arr, const uint32_t& array_size);
+
 private:
 
     const int RUN = 32;
@@ -140,10 +143,26 @@ private:
 
     uint32_t partition (T* arr, uint32_t first, const uint32_t& last);
 
-    bool isSorted(const T* arr);
+    bool isSorted(const T* arr, const uint32_t& array_size);
 
+    bool isSortedIntro(const T* arr);
 };
 
+template<typename T>
+void Sorter<T>::bozoSort(T* arr, const uint32_t &array_size) {
+    srand(static_cast<unsigned int>(time(nullptr)));
+    T t;
+    while (!isSorted(arr, array_size)) {
+        // Случайный выбор двух индексов для обмена
+        int i = rand() % array_size;
+        int j = rand() % array_size;
+
+        // Обмен значениями
+        t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+    }
+}
 
 template<typename T>
 void Sorter<T>::countingSort(int* numbers, const uint32_t& array_size)
@@ -897,7 +916,7 @@ void Sorter<T>::cycleSort(T *arr, const uint32_t& array_size)
 template<typename T>
 void Sorter<T>::introSort(T* arr, const uint32_t& array_size)
 {
-    introSort( arr, 0, array_size - 1, (int(2*log(double(array_size)))));
+    introSort(arr, 0, array_size - 1, (int(2*log(double(array_size)))));
     insertion(arr, array_size);
 }
 
@@ -924,7 +943,7 @@ void Sorter<T>::introSort(T *arr, const uint32_t& first, uint32_t last, const in
         if(depth == 0) {
             heapSort(&arr[first], first, last - first + 1);
         } else {
-            if(isSorted(arr))
+            if(isSortedIntro(arr))
                 break;
             pivot = partition(arr, first, last);
             introSort(arr, pivot + 1, last, depth - 1);
@@ -971,8 +990,18 @@ uint32_t Sorter<T>::partition(T *arr, uint32_t first, const uint32_t& last)
 }
 
 template<typename T>
-bool Sorter<T>::isSorted(const T *arr)
+bool Sorter<T>::isSorted(const T *arr, const uint32_t& array_size)
 {
+    for (uint32_t i = 1; i < array_size; ++i) {
+        if (arr[i] < arr[i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template<typename T>
+bool Sorter<T>::isSortedIntro(const T *arr) {
     if(arr[0] > arr[1]){
         return false;
     } else {
