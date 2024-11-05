@@ -85,6 +85,9 @@ public:
     // Клоунская сортировка
     void bozoSort(T* arr, const uint32_t& array_size);
 
+    // Сортировка перестановками
+    void permSort(T* arr, const uint32_t& array_size);
+
 private:
 
     const int RUN = 32;
@@ -146,18 +149,103 @@ private:
     bool isSorted(const T* arr, const uint32_t& array_size);
 
     bool isSortedIntro(const T* arr);
+
+    uint32_t fac(uint32_t array_size);
+
+    void permute(T* arr, uint32_t l, uint32_t r, T** permutations, uint32_t& count);
+
+    void findMinPermutation(T** permutations, uint32_t count, T* minPerm);
 };
+
+template<typename T>
+void Sorter<T>::findMinPermutation(T** permutations, uint32_t count, T* minPerm) {
+    bool isLess;
+    for (uint32_t i = 0; i < count; ++i) {
+        isLess = false;
+        for (uint32_t j = 0; j < count; ++j) {
+            if (permutations[i][j] < minPerm[j]) {
+                isLess = true;
+                break;
+            } else if (permutations[i][j] > minPerm[j]) {
+                isLess = false;
+                break;
+            }
+        }
+        if (isLess) {
+            for (uint32_t j = 0; j < count; ++j) {
+                minPerm[j] = permutations[i][j];
+            }
+        }
+    }
+}
+
+template<typename T>
+void Sorter<T>::permute(T *arr, const uint32_t l, const uint32_t r, T **permutations, uint32_t &count) {
+    if (l == r) {
+        for (uint32_t i = 0; i <= r; ++i) {
+            permutations[count][i] = arr[i];
+        }
+        count++;
+    } else {
+        T t;
+        for (uint32_t i = l; i <= r; ++i) {
+            t = arr[i];
+            arr[i] = arr[l];
+            arr[l] = t;
+            permute(arr, l + 1, r, permutations, count);
+            t = arr[i];
+            arr[i] = arr[l];
+            arr[l] = t;
+        }
+    }
+}
+
+template<typename T>
+uint32_t Sorter<T>::fac(uint32_t array_size) {
+    if (array_size > 1) {
+        return array_size * fac(array_size - 1);
+    } else {
+        return 1;
+    }
+}
+
+template<typename T>
+void Sorter<T>::permSort(T *arr, const uint32_t &array_size) {
+    uint32_t maxPermutations = fac(array_size);
+    T* permutations[maxPermutations];
+    for (uint32_t i = 0; i < maxPermutations; ++i) {
+        permutations[i] = new T[array_size];
+    }
+
+    uint32_t count = 0;
+    permute(arr, 0, array_size - 1, permutations, count);
+
+    // Инициализируем минимальную перестановку первым элементом
+    T* minPerm = new T[array_size];
+    for (uint32_t i = 0; i < array_size; ++i) {
+        minPerm[i] = permutations[0][i];
+    }
+
+    findMinPermutation(permutations, count, minPerm);
+    for (uint32_t i = 0; i < array_size; ++i) {
+        arr[i] = minPerm[i];
+    }
+
+    // Освобождаем память
+    for (int i = 0; i < maxPermutations; ++i) {
+        delete[] permutations[i];
+    }
+    delete[] minPerm;
+}
 
 template<typename T>
 void Sorter<T>::bozoSort(T* arr, const uint32_t &array_size) {
     srand(static_cast<unsigned int>(time(nullptr)));
     T t;
     while (!isSorted(arr, array_size)) {
-        // Случайный выбор двух индексов для обмена
         int i = rand() % array_size;
         int j = rand() % array_size;
 
-        // Обмен значениями
         t = arr[i];
         arr[i] = arr[j];
         arr[j] = t;
