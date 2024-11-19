@@ -73,7 +73,7 @@ public:
     // Сортировка Блин
     void pancakeSort(T* arr, const uint32_t& array_size);
 
-    // Блуждающая Сортировка
+    // Блуждающая (Придурковатая) Сортировка
     void stoogeSort(T* arr, const uint32_t& array_size);
 
     // Циклическая Сортировка
@@ -220,7 +220,6 @@ void Sorter<T>::permSort(T *arr, const uint32_t &array_size) {
     uint32_t count = 0;
     permute(arr, 0, array_size - 1, permutations, count);
 
-    // Инициализируем минимальную перестановку первым элементом
     T* minPerm = new T[array_size];
     for (uint32_t i = 0; i < array_size; ++i) {
         minPerm[i] = permutations[0][i];
@@ -231,7 +230,6 @@ void Sorter<T>::permSort(T *arr, const uint32_t &array_size) {
         arr[i] = minPerm[i];
     }
 
-    // Освобождаем память
     for (int i = 0; i < maxPermutations; ++i) {
         delete[] permutations[i];
     }
