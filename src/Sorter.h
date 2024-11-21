@@ -18,10 +18,10 @@ public:
     // Сортировка слиянием
     void mergeSort(T* arr, const uint32_t& array_size);
 
-    // Сортировка кучей(Пирамидальная сортировка)
+    // Сортировка кучей (Пирамидальная сортировка)
     void heapSort(T* numbers, const uint32_t& array_size);
 
-    // Быстрая сортировка(сортировка Хора)
+    // Быстрая сортировка (сортировка Хора)
     void quickSort(T* numbers, const uint32_t& array_size);
 
     // Сортировка пузырьком
@@ -372,11 +372,11 @@ void Sorter<T>::merge(T* arr, const uint32_t& first, const uint32_t& second, con
 template<typename T>
 void Sorter<T>::divide_and_merge(T* arr, const uint32_t& left, const uint32_t& right)
 {
-    if(left == right)
+    if (left == right)
         return;
     if (right - 1 == left)
     {
-        if(arr[right] < arr[left])
+        if (arr[right] < arr[left])
         {
             T t = arr[right];
             arr[right] = arr[left];
@@ -403,19 +403,19 @@ void Sorter<T>::heapSort(T* numbers, const uint32_t& begin, const uint32_t& end)
 {
     uint32_t i;
     T t;
-    for(i = (end - 1) / 2; i >= begin; --i){
+    for (i = (end - 1) / 2; i >= begin; --i){
         heaping(numbers, i , end - 1);
-        if(i == 0)
+        if (i == 0)
             break;
     }
 
-    for(i = end - 1; i > begin; --i)
+    for (i = end - 1; i > begin; --i)
     {
         t = numbers[i];
         numbers[i] = numbers[begin];
         numbers[begin] = t;
         heaping(numbers, begin, i - 1);
-        if(i == 0)
+        if (i == 0)
             break;
     }
 }
@@ -429,7 +429,7 @@ void Sorter<T>::heaping(T* numbers, uint32_t begin, const uint32_t& end)
         k = 2 * begin;
         while (k < end && numbers[k] < numbers[k + 1])
             ++k;
-        if(save >= numbers[k])
+        if (save >= numbers[k])
             break;
         numbers[begin] = numbers[k];
         begin = k;
@@ -452,7 +452,6 @@ void Sorter<T>::quickSort(T* numbers, const uint32_t& left, const uint32_t& righ
         uint32_t pivot  = rerange(numbers, left, right, x);
         quickSort(numbers, left, pivot);
         quickSort(numbers, pivot + 1, right);
-
     }
 }
 
@@ -653,8 +652,8 @@ void Sorter<T>::insertionSort(T* arr, const uint32_t& array_size)
     uint32_t i, j;
     T t;
 
-    for(i = 1; i < array_size; ++i)
-        for(j = i; j > 0 && arr[j - 1] > arr[j]; --j)
+    for (i = 1; i < array_size; ++i)
+        for (j = i; j > 0 && arr[j - 1] > arr[j]; --j)
         {
             t = arr[j];
             arr[j] = arr[j - 1];
