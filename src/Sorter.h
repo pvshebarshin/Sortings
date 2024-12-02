@@ -505,7 +505,6 @@ void Sorter<T>::shakerSort(T* arr, const uint32_t& array_size)
     uint32_t left = 0;
     uint32_t right = array_size - 1;
     do {
-
         for (i = left; i < right; ++i)
             if (arr[i] > arr[i + 1])
             {
@@ -708,7 +707,7 @@ void Sorter<T>::bitonicMerge(T *arr, const uint32_t& begin, const uint32_t& end,
         uint32_t x = end / 2;
         for (uint32_t i = begin; i < begin + x; ++i)
         {
-            if(marker == arr[i] > arr[i + x])
+            if (marker == arr[i] > arr[i + x])
             {
                 t = arr[i];
                 arr[i] = arr[i + x];
@@ -749,7 +748,7 @@ template<typename T>
 void Sorter<T>::timSort(T* arr, const uint32_t& array_size)
 {
     for (uint32_t i = 0; i < array_size; i += RUN)
-        if(i + 31 < array_size - 1) {
+        if (i + 31 < array_size - 1) {
             insertion(arr, i, i + 31);
         } else {
             insertion(arr, i, array_size - 1);
